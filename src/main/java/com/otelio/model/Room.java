@@ -1,5 +1,7 @@
 package com.otelio.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +21,7 @@ public class Room {
     
     @ManyToOne
     @JoinColumn(name = "hotel_id") 
+    @JsonBackReference
     private Hotel hotel;
 
     public Room() {}

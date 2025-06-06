@@ -26,7 +26,15 @@ public class ReservationService {
     }
 
     public Reservation saveReservation(Reservation reservation) {
-        //! Ici tu peux ajouter de la logique métier avant de sauvegarder
+        List<Reservation> conflicts = reservationRepository.findConflictingReservations(
+            reservation.getRoom().getId(),
+            reservation.getCheckInDate(),
+            reservation.getCheckOutDate()
+        );
+
+        if (!conflicts.isEmpty()) {
+            throw new IllegalStateException("This room is already reserved for the selected dates.");
+        }
         return reservationRepository.save(reservation);
     }
 

@@ -3,6 +3,8 @@ package com.otelio.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Hotel {
 
@@ -14,6 +16,7 @@ public class Hotel {
     private String address;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Room> rooms;
 
     public Hotel() {}
